@@ -1,4 +1,5 @@
 {
+  "SECRET": "NOT_SO_SECRET",
   "owner_email": "help.saksham.python@gmail.com",
   "debug": true,
   "local_database_uri": "postgresql://postgres:postgres123@localhost/todos-website"
