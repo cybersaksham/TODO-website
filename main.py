@@ -18,7 +18,8 @@ app.secret_key = params["SECRET"]
 if params["debug"]:
     app.config['SQLALCHEMY_DATABASE_URI'] = params["local_database_uri"]
 else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', None).replace("postgres", "postgresql")
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', None).replace("postgres", "postgresql") \
+                                            + "?sslmode=require"
 db = SQLAlchemy(app)
 
 
