@@ -56,6 +56,8 @@ password_ = os.environ.get('OWNER_PASSWORD', None)
 
 @app.route('/')
 def home():
+    if "edit" in session:
+        session.pop("edit")
     if "user" in session:
         return render_template("index.html")
     return render_template("login.html")
@@ -171,6 +173,35 @@ def forgot_user():
         else:
             # If user is not found in database
             return jsonify(error="Not Registered")
+
+
+@app.route('/logout_user', methods=["POST"])
+def logout_user():
+    # Logging out
+    if request.method == "POST":
+        if "user" in session:
+            session.pop("user")
+            return jsonify(error=None)
+        else:
+            return jsonify(error="Logged out already")
+
+
+@app.route('/delete_user', methods=["POST"])
+def delete_user():
+    # Deleting user
+    if request.method == "POST":
+        if "user" in session:
+            # Finding user by email
+            user = db.session.query(Users).filter(Users.email == session["user"]).first()
+            db.session.delete(user)
+            todos__ = db.session.query(Todos).filter(Todos.email == session["user"]).all()
+            for todo__ in todos__:
+                db.session.delete(todo__)
+            db.session.commit()
+            session.pop("user")
+            return jsonify(error=None)
+        else:
+            return jsonify(error="Logged out")
 
 
 @app.route('/send_otp', methods=["POST"])

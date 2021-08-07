@@ -132,4 +132,38 @@ $(document).ready(function(){
             }
         });
     });
+
+    // Pressing logout button
+    $('#logout').click(function(e){
+        e.preventDefault();
+        if (confirm("Do you really want to logout")){
+            // Sending request to logout user
+            $.ajax({
+                url: '/logout_user',
+                type: 'POST',
+                success: function(response){
+                    $(location).attr('href', '/')
+                },
+            });
+        }
+    });
+
+    // Pressing delete account button
+    $('#dltUser').click(function(e){
+        e.preventDefault();
+        if (confirm("Do you really want to delete account & todos permanently")){
+            // Sending request to delete user
+            $.ajax({
+                url: '/delete_user',
+                type: 'POST',
+                success: function(response){
+                    $(location).attr('href', '/')
+                },
+                error: function(error){
+                    // If error occurred in post request
+                    console.log(error);
+                }
+            });
+        }
+    });
 });
