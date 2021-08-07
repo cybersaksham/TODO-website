@@ -1,3 +1,4 @@
+# Importing Modules
 from flask import Flask, render_template, session, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 import json
@@ -54,6 +55,7 @@ email_ = params["owner_email"]
 password_ = os.environ.get('OWNER_PASSWORD', None)
 
 
+# Main Route
 @app.route('/')
 def home():
     if "edit" in session:
