@@ -13,7 +13,9 @@ function showTodos(){
                 $.each(response["data"], function(index, value){
                     $title__ = "<h5 class=\"card-header\">" + value["title"] + "</h5>"
                     $content__ = "<p class=\"card-text\">" + value["content"] + "</p>"
-                    $button__ = "<button id=\"dlt_" + value["id"] + "\" class=\"btn btn-primary\">Delete</button>"
+                    $editButton__ = "<button id=\"edit_" + value["id"] + "\" class=\"btn btn-warning\"><i class=\"bi bi-pencil-fill\"></i></button>"
+                    $dltButton__ = "<button id=\"dlt_" + value["id"] + "\" class=\"btn btn-danger\"><i class=\"bi bi-trash-fill\"></i></button>"
+                    $button__ = "<div class=\"btn-group\" role=\"group\">" + $editButton__ + $dltButton__ + "</div>"
                     $cardBody__ = "<div class=\"card-body\">" + $content__ + $button__ + "</div>"
                     $cardFoot__ = "<div class=\"card-footer\">" + value["time"] + "</div>"
                     $card__ = "<div class=\"todoCard card my-4 mx-2\" style=\"width: 100%;\">" + $title__ + $cardBody__ + $cardFoot__ + "</div>"
@@ -60,13 +62,13 @@ $(document).ready(function(){
         }
     });
 
-    // Clicking delete button
     $.ajax({
         url: '/fetch_todos',
         type: 'POST',
         success: function(response){
             if(response["error"] == null){
                 $.each(response["data"], function(index, value){
+                    // Clicking delete button
                     $('#dlt_' + value["id"]).click(function(e){
                         e.preventDefault();
                         $.ajax({
@@ -77,6 +79,17 @@ $(document).ready(function(){
                                     showTodos();
                                 }
                             }
+                        });
+                    });
+                    // Clicking edit button
+                    $('#edit_' + value["id"]).click(function(e){
+                        e.preventDefault();
+                        $('#title').val(value["title"]);
+                        $('#todo').val(value["content"]);
+                        $('#addBtn').text("Save");
+                        $.ajax({
+                            url: '/save_edit?id=' + value["id"],
+                            type: 'POST',
                         });
                     });
                 });

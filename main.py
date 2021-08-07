@@ -207,14 +207,25 @@ def fetch_todos():
 
 @app.route('/add_todo', methods=["POST"])
 def add_todo():
-    # Adding todos
+    # Adding/Editing todos
     if request.method == "POST":
         if "user" in session:
             # Getting data from form
             title__ = request.form["title"]
             content__ = request.form["todo"]
-            todo__ = Todos(session["user"], title__, content__, "08 Aug, 2021 12:45")
-            db.session.add(todo__)
+            if "edit" not in session:
+                todo__ = Todos(session["user"], title__, content__, "08 Aug, 2021 12:45")
+                db.session.add(todo__)
+            else:
+                todo__ = db.session.query(Todos).filter(Todos.id == session["edit"])
+                if todo__.first() is not None:
+                    if todo__.first().email == session["user"]:
+                        todo__.update({Todos.title: title__, Todos.content: content__})
+                        session.pop("edit")
+                    else:
+                        return jsonify(error="Incorrect User")
+                else:
+                    return jsonify(error="No such todo exists")
             db.session.commit()
             return jsonify(error=None)
         else:
@@ -229,13 +240,21 @@ def delete_todo():
             # Getting data from arguments
             id__ = request.args.get("id")
             todo__ = db.session.query(Todos).filter(Todos.id == id__).first()
-            if todo__.email == session["user"]:
-                db.session.delete(todo__)
-                db.session.commit()
-                return jsonify(error=None)
-            return jsonify(error="Incorrect User")
-        else:
-            return jsonify(error="Login First")
+            if todo__ is not None:
+                if todo__.email == session["user"]:
+                    db.session.delete(todo__)
+                    db.session.commit()
+                    return jsonify(error=None)
+                return jsonify(error="Incorrect User")
+            return jsonify(error="No such todo exists")
+        return jsonify(error="Login First")
+
+
+@app.route('/save_edit', methods=["POST"])
+def save_edit():
+    if request.method == "POST":
+        session["edit"] = request.args.get("id")
+        return jsonify(error=None)
 
 
 @app.route('/dlt_all', methods=["POST"])
