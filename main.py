@@ -37,7 +37,7 @@ class Users(db.Model):
 class Todos(db.Model):
     __tablename__ = "todos"
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(50), unique=True, nullable=False)
+    email = db.Column(db.String(50), nullable=False)
     title = db.Column(db.String(20), nullable=False)
     content = db.Column(db.String(50), nullable=False)
     time = db.Column(db.String(20), nullable=False)
@@ -203,6 +203,22 @@ def fetch_todos():
             return jsonify(error="No todo", data=None)
         else:
             return jsonify(error="Login First", data=None)
+
+
+@app.route('/add_todo', methods=["POST"])
+def add_todo():
+    # Adding todos
+    if request.method == "POST":
+        if "user" in session:
+            # Getting data from form
+            title__ = request.form["title"]
+            content__ = request.form["todo"]
+            todo__ = Todos(session["user"], title__, content__, "08 Aug, 2021 12:45")
+            db.session.add(todo__)
+            db.session.commit()
+            return jsonify(error=None)
+        else:
+            return jsonify(error="Login First")
 
 
 if __name__ == '__main__':
