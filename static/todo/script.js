@@ -83,4 +83,17 @@ $(document).ready(function(){
             }
         }
     });
+
+    // Clicking delete all button
+    $('#dltAll').click(function(e){
+        e.preventDefault();
+        // Sending request to delete all todos
+        $.ajax({
+            url: '/dlt_all',
+            type: 'POST',
+            success: function(response){
+                showTodos();
+            }
+        });
+    });
 });

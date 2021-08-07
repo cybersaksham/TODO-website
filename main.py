@@ -238,5 +238,19 @@ def delete_todo():
             return jsonify(error="Login First")
 
 
+@app.route('/dlt_all', methods=["POST"])
+def dlt_all():
+    # Deleting all todos
+    if request.method == "POST":
+        if "user" in session:
+            todos__ = db.session.query(Todos).filter(Todos.email == session["user"]).all()
+            for todo__ in todos__:
+                db.session.delete(todo__)
+            db.session.commit()
+            return jsonify(error=None)
+        else:
+            return jsonify(error="Login First")
+
+
 if __name__ == '__main__':
     app.run(debug=params["debug"])
