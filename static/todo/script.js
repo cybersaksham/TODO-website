@@ -13,7 +13,7 @@ function showTodos(){
                 $.each(response["data"], function(index, value){
                     $title__ = "<h5 class=\"card-header\">" + value["title"] + "</h5>"
                     $content__ = "<p class=\"card-text\">" + value["content"] + "</p>"
-                    $button__ = "<button id=\"" + value["id"] + "\" class=\"btn btn-primary\">Delete</button>"
+                    $button__ = "<button id=\"dlt_" + value["id"] + "\" class=\"btn btn-primary\">Delete</button>"
                     $cardBody__ = "<div class=\"card-body\">" + $content__ + $button__ + "</div>"
                     $cardFoot__ = "<div class=\"card-footer\">" + value["time"] + "</div>"
                     $card__ = "<div class=\"todoCard card my-4 mx-2\" style=\"width: 100%;\">" + $title__ + $cardBody__ + $cardFoot__ + "</div>"
@@ -57,6 +57,30 @@ $(document).ready(function(){
                     $(location).attr('href', '/');
                 }
             });
+        }
+    });
+
+    // Clicking delete button
+    $.ajax({
+        url: '/fetch_todos',
+        type: 'POST',
+        success: function(response){
+            if(response["error"] == null){
+                $.each(response["data"], function(index, value){
+                    $('#dlt_' + value["id"]).click(function(e){
+                        e.preventDefault();
+                        $.ajax({
+                            url: '/delete_todo?id=' + value["id"],
+                            type: 'POST',
+                            success: function(response){
+                                if(response["error"] == null){
+                                    showTodos();
+                                }
+                            }
+                        });
+                    });
+                });
+            }
         }
     });
 });

@@ -221,5 +221,22 @@ def add_todo():
             return jsonify(error="Login First")
 
 
+@app.route('/delete_todo', methods=["POST"])
+def delete_todo():
+    # Deleting todos
+    if request.method == "POST":
+        if "user" in session:
+            # Getting data from arguments
+            id__ = request.args.get("id")
+            todo__ = db.session.query(Todos).filter(Todos.id == id__).first()
+            if todo__.email == session["user"]:
+                db.session.delete(todo__)
+                db.session.commit()
+                return jsonify(error=None)
+            return jsonify(error="Incorrect User")
+        else:
+            return jsonify(error="Login First")
+
+
 if __name__ == '__main__':
     app.run(debug=params["debug"])
