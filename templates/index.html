@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos App</title>
+    <link rel="icon" type="image/png" href="/static/assets/favicon.png"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<nav class="sticky-top navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div style="justify-content: flex-end;" class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex">
+                <input class="form-control me-2" id="searchTxt" type="search" placeholder="Search"
+                       aria-label="Search">
+            </form>
+            <button class="my-2 btn btn-outline-success" id="dltAll">Delete All</button>
+        </div>
+    </div>
+</nav>
+<div class="container my-3">
+    <h1>Welcome to My TODOS.</h1>
+    <p id="errorText" class="text-danger"></p>
+    <form>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" maxlength="20" class="form-control" id="title" name="title" placeholder="Add a title...">
+        </div>
+        <div class="mb-3">
+            <label for="todo" class="form-label">Add todo</label>
+            <textarea style="height: 100px;" class="form-control" maxlength="50"
+                      placeholder="Add your todo here..." id="todo" name="todo"></textarea>
+        </div>
+        <button type="submit" id="addBtn" class="btn btn-primary">Add</button>
+    </form>
+    <br>
+    <h1>Your Todos</h1>
+    <hr>
+    <div style="display: none;" id="nothing" class="row container-fluid">
+        <h5>Nothing to show</h5>
+    </div>
+    <div id="todos" class="row container-fluid">
+        <div class="todoCard card my-2 mx-2" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Title</h5>
+                <p class="card-text">Content</p>
+                <button id="id" class="btn btn-primary">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="/static/todo/script.js"></script>
+
+</html>
