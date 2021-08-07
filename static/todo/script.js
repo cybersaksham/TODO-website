@@ -93,6 +93,29 @@ $(document).ready(function(){
                         });
                     });
                 });
+                // Searching todos
+                $todos__ = $('.todoCard').toArray();
+                $('#searchTxt').on('input', function(){
+                    $count__ = 0;
+                    $searchTxt = $('#searchTxt').val().toLowerCase();
+                    $.each($todos__, function(index, value){
+                        $todoTitle__ = $(value).find('.card-header').text().toLowerCase();
+                        $todoContent__ = $(value).find('.card-text').text().toLowerCase();
+                        if($todoTitle__.includes($searchTxt) || $todoContent__.includes($searchTxt)){
+                            $(value).show();
+                            $count__++;
+                        }
+                        else{
+                            $(value).hide();
+                        }
+                    });
+                    if($count__ == 0){
+                        $('#nothing').show();
+                    }
+                    else{
+                        $('#nothing').hide();
+                    }
+                });
             }
         }
     });
