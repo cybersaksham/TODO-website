@@ -18,4 +18,4 @@ pip3 install psycopg2
 ```
 
 # Status
-<p>Website project started.</p>
+<p>You can create your account & add, edit or delete todos.</p>
