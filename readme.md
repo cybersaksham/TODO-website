@@ -13,6 +13,9 @@ pip install flask
 ```cmd
 pip install flask-sqlalchemy
 ```
+```cmd
+pip3 install psycopg2
+```
 
 # Status
 <p>Website project started.</p>
