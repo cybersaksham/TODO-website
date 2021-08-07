@@ -187,5 +187,23 @@ def send_otp():
     return jsonify(response=response.json())
 
 
+@app.route('/fetch_todos', methods=["POST"])
+def fetch_todos():
+    # Fetching todos
+    if request.method == "POST":
+        if "user" in session:
+            # Getting all todos
+            list__ = db.session.query(Todos).filter(Todos.email == session["user"]).all()
+            if len(list__) != 0:
+                data__ = []
+                for todo in list__:
+                    data__.append({"id": todo.id, "title": todo.title,
+                                   "content": todo.content, "time": todo.time})
+                return jsonify(error=None, data=data__)
+            return jsonify(error="No todo", data=None)
+        else:
+            return jsonify(error="Login First", data=None)
+
+
 if __name__ == '__main__':
     app.run(debug=params["debug"])
