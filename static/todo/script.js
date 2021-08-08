@@ -87,6 +87,8 @@ $(document).ready(function(){
                         $('#title').val(value["title"]);
                         $('#todo').val(value["content"]);
                         $('#addBtn').text("Save");
+                        $('#modalTitle').text("Edit Todo");
+                        $('#showModalBtn').trigger('click');
                         $.ajax({
                             url: '/save_edit?id=' + value["id"],
                             type: 'POST',
@@ -164,6 +166,13 @@ $(document).ready(function(){
                     console.log(error);
                 }
             });
+        }
+    });
+
+    // Closing Modal
+    $('#addModal').on("hide.bs.modal", function() {
+        if ($('#addBtn').text() == "Save"){
+            $(location).attr('href', '/');
         }
     });
 });

@@ -46,22 +46,37 @@
 </nav>
 <!-- Main Container -->
 <div class="container my-3">
-    <h1>Welcome to My TODOS.</h1>
-    <p id="errorText" class="text-danger"></p>
-    <form id="addForm">
-        <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <input type="text" maxlength="20" class="form-control" id="title" name="title" placeholder="Add a title...">
+    <!-- Add Todos Modal -->
+    <button type="button" id="showModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+        Add Todo
+    </button>
+    <div class="modal fade show" id="addModal" tabindex="-1" aria-labelledby="addModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Add a todo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="errorText" class="text-danger"></p>
+                    <form id="addForm">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" maxlength="20" class="form-control" id="title" name="title"
+                                   placeholder="Add a title...">
+                        </div>
+                        <div class="mb-3">
+                            <label for="todo" class="form-label">Add todo</label>
+                            <textarea style="height: 100px;" class="form-control" maxlength="50"
+                                      placeholder="Add your todo here..." id="todo" name="todo"></textarea>
+                        </div>
+                        <button type="submit" id="addBtn" class="btn btn-primary">Add</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="todo" class="form-label">Add todo</label>
-            <textarea style="height: 100px;" class="form-control" maxlength="50"
-                      placeholder="Add your todo here..." id="todo" name="todo"></textarea>
-        </div>
-        <button type="submit" id="addBtn" class="btn btn-primary">Add</button>
-    </form>
-    <br>
-    <h1>Your Todos</h1>
+    </div>
     <hr>
     <div id="nothing" class="row container-fluid">
         <h5>Nothing to show</h5>
