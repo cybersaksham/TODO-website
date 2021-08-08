@@ -30,17 +30,21 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" id="logout" href="">Logout</a>
+                    <a class="nav-link" id="logout" data-bs-toggle="modal" data-bs-target="#logoutModal"
+                       href="">Logout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="dltUser" href="">Delete</a>
+                    <a class="nav-link" id="dltUser" data-bs-toggle="modal" data-bs-target="#dltModal"
+                       href="">Delete</a>
                 </li>
             </ul>
             <form class="d-flex">
                 <input class="form-control me-2" id="searchTxt" type="search" placeholder="Search"
                        aria-label="Search">
             </form>
-            <button class="my-2 btn btn-outline-success" id="dltAll">Delete All</button>
+            <button class="my-2 btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#dltAllModal"
+                    id="dltAll"> Delete All
+            </button>
         </div>
     </div>
 </nav>
@@ -73,6 +77,63 @@
                         </div>
                         <button type="submit" id="addBtn" class="btn btn-primary">Add</button>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Logout Model -->
+    <div class="modal fade show" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you really want to logout?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="button" id="yesLogout" class="btn btn-primary" data-bs-dismiss="modal">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Model -->
+    <div class="modal fade show" id="dltModal" tabindex="-1" aria-labelledby="dltModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you really want to delete your account & all todos also?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="button" id="yesDelete" class="btn btn-primary" data-bs-dismiss="modal">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete All Todos Model -->
+    <div class="modal fade show" id="dltAllModal" tabindex="-1" aria-labelledby="dltAllModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you really want to delete all todos?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="button" id="yesDeleteAll" class="btn btn-primary" data-bs-dismiss="modal">Yes</button>
                 </div>
             </div>
         </div>
